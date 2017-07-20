@@ -44,10 +44,6 @@ feature 'Add vacation', js: true do
       find("option[value='midden']").click
     end
 
-    # within 'select#vacation_theme_ids' do
-    #   find(:option, 'Ordesa').select_option
-    # end
-
     select("Ordesa", from: "vacation_theme_ids")
 
     fill_in 'vacation_description', with: Faker::Lorem.sentence(40)
