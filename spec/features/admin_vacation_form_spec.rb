@@ -44,9 +44,11 @@ feature 'Add vacation', js: true do
       find("option[value='midden']").click
     end
 
-    within 'select#vacation_theme_ids' do
-      ('Ordesa').click
-    end
+    # within 'select#vacation_theme_ids' do
+    #   find(:option, 'Ordesa').select_option
+    # end
+
+    select("Ordesa", from: "vacation_theme_ids")
 
     fill_in 'vacation_description', with: Faker::Lorem.sentence(40)
 
@@ -67,6 +69,5 @@ feature 'Add vacation', js: true do
     # expect to have a product in the db now
     expect(Vacation.all.length).to eq(1)
     expect(Vacation.first.title).to eq("Awesome Mountains and Valley's")
-
   end
 end

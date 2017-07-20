@@ -1,0 +1,7 @@
+machine:
+  ruby:
+    version: 2.3.1
+
+test:
+  override:
+    - bundle exec rspec spec -r rspec_junit_formatter --format progress --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml
