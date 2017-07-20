@@ -2,6 +2,16 @@ machine:
   ruby:
     version: 2.3.1
 
+# This makes sure Chrome is always up to date in your test suite
+# On average this adds about 10 seconds to your build suite
+# Be sure to use Ubuntu 14.04 (Trusty) in the CircleCI's OS setting (Settings > Build Environment)
+dependencies:
+  pre:
+    - curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    - sudo dpkg -i google-chrome.deb
+    - sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
+    - rm google-chrome.deb
+
 test:
   override:
     - bundle exec rspec spec -r rspec_junit_formatter --format progress --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml
